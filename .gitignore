@@ -1,0 +1,9 @@
+node_modules/
+dist/
+*.log
+.env
+npm-debug.log*
+.DS_Store
+.runner.pid
+.server.pid
+.stop_requested
