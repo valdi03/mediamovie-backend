@@ -51,4 +51,4 @@ ENV NODE_ENV=production
 
 EXPOSE 3000
 
-CMD ["node", "--max-old-space-size=128", "dist/server.js"]
+CMD ["node", "--max-old-space-size=256", "dist/server.js"]
