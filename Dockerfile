@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 ENV NODE_ENV=production
-ENV PORT=10000
+ENV PORT=3000
 ENV HOST=0.0.0.0
 ENV IDLIX_BASE_URL=https://z3.idlixku.com
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
@@ -48,6 +48,6 @@ COPY src ./src
 
 RUN npm run build
 
-EXPOSE 10000
+EXPOSE 3000
 
 CMD ["node", "dist/server.js"]
