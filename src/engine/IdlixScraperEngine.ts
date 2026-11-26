@@ -66,7 +66,8 @@ export class IdlixScraperEngine {
           '--disable-gpu',
           '--no-first-run',
           '--no-zygote',
-          '--window-size=1920,1080',
+          '--renderer-process-limit=1',
+          '--window-size=1280,720',
           '--lang=id-ID,id,en-US,en',
           '--ignore-certificate-errors',
           '--allow-running-insecure-content',
@@ -124,7 +125,15 @@ export class IdlixScraperEngine {
         } catch (_) {}
         this.isReady = true;
       } catch (err: any) {
-        console.error(`[ScraperEngine] Failed to initialize browser session: ${err?.message || err}`);
+        let debugTitle = 'unknown';
+        let debugUrl = 'unknown';
+        try {
+          if (this.page && !this.page.isClosed()) {
+            debugTitle = await this.page.title();
+            debugUrl = this.page.url();
+          }
+        } catch (_) {}
+        console.error(`[ScraperEngine] Failed to initialize browser session: ${err?.message || err} | Title: "${debugTitle}" | URL: ${debugUrl}`);
         this.isReady = false;
         if (this.browser) {
           try {
