@@ -319,7 +319,8 @@ export class IdlixScraperEngine {
     const playInfoRes = await this.executeFetch(`/api/watch/play-info/${targetType}/${targetId}`);
     const playInfo = playInfoRes.data;
     if (!playInfo?.gateToken) {
-      throw new Error('Failed to obtain playback gate token from provider');
+      console.error(`[ScraperEngine] play-info failed (status=${playInfoRes.status}):`, JSON.stringify(playInfo)?.slice(0, 300));
+      throw new Error(`Failed to obtain playback gate token from provider (status=${playInfoRes.status}): ${typeof playInfo === 'string' ? playInfo.slice(0, 120) : JSON.stringify(playInfo)?.slice(0, 120)}`);
     }
 
     const serverNow = playInfo.serverNow || Date.now();
